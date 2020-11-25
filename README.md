@@ -21,16 +21,16 @@
 
 ## items テーブル
 
-| Column            | Type       | Options     |
-| ----------------- | ---------- | ----------- |
-| product_name      | string     | null: false |
-| description       | text       | null: false |
-| condition_id      | string     | null: false |
-| ship_cost_id      | string     | null: false |
-| ship_from_area-id | string     | null: false |
-| ship_days_id      | integer    | null: false |
-| price             | integer    | null: false |
-| user              | references | null: false |
+| Column            | Type       | Options                   |
+| ----------------- | ---------- | ------------------------- |
+| product_name      | string     | null: false               |
+| description       | text       | null: false               |
+| condition_id      | string     | null: false, unique: true |
+| ship_cost_id      | string     | null: false, unique: true |
+| ship_from_area-id | string     | null: false, unique: true |
+| ship_days_id      | integer    | null: false, unique: true |
+| price             | integer    | null: false               |
+| user              | references | foreign_key: true         |
 
 ### Association
 
@@ -39,11 +39,11 @@
 
 ## order テーブル
 
-| Column        | Type       | Options     |
-| ------------- | ---------- | ----------- |
-| purchase_date | timestamp  | null: false |
-| users         | references | null: false |
-| items         | references | null: false |
+| Column        | Type       | Options           |
+| ------------- | ---------- | ----------------- |
+| purchase_date | timestamp  | null: false       |
+| users         | references | foreign_key: true |
+| items         | references | foreign_key: true |
 
 ### Association
 
@@ -60,8 +60,8 @@
 | block_number  | integer    | null: false |
 | building_name | string     |             |
 | phone_number  | integer    | null: false |
-| users         | references | null: false |
-| items         | references | null: false |
+| users         | references | foreign_key: true |
+| items         | references | foreign_key: true |
 
 ### Association
 
