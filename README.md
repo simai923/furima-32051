@@ -1,24 +1,59 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users テーブル
 
-Things you may want to cover:
+| Column       | Type   | Options     |
+| ------------ | ------ | ----------- |
+| nickname     | string | null: false |
+| email        | string | null: false |
+| password     | string | null: false |
+| last_name    | string | null: false |
+| first_name   | string | null: false |
+| last_name_k  | string | null: false |
+| first_name_k | string | null: false |
+| birth_date   | date   | null: false |
 
-* Ruby version
+### Association
 
-* System dependencies
+- has_many :items
+- has_many :orders
 
-* Configuration
+## items テーブル
 
-* Database creation
+| Column         | Type       | Options     |
+| -------------- | ---------- | ----------- |
+| product        | string     | null: false |
+| description    | text       | null: false |
+| condition      | string     | null: false |
+| ship_cost      | string     | null: false |
+| ship_from_area | string     | null: false |
+| ship_days      | integer    | null: false |
+| price          | integer    | null: false |
+| user_id        | references | null: false |
 
-* Database initialization
+### Association
 
-* How to run the test suite
+- belongs_to :users
+- has_one :order
 
-* Services (job queues, cache servers, search engines, etc.)
+## orders テーブル
 
-* Deployment instructions
+| Column                 | Type       | Options     |
+| ---------------------- | ---------- | ----------- |
+| card_number            | integer    | null: false |
+| exp_month              | integer    | null: false |
+| exp_year               | integer    | null: false |
+| card_verification_cord | integer    | null: false |
+| postal_cord            | integer    | null: false |
+| prefecture             | string     | null: false |
+| city                   | string     | null: false |
+| block_number           | integer    | null: false |
+| building_name          | string     |             |
+| phone_number           | integer    | null: false |
+| users_id               | references | null: false |
+| items_id               | references | null: false |
 
-* ...
+### Association
+
+- belongs_to :user
+- belongs_to :order
