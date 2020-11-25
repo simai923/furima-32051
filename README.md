@@ -24,7 +24,7 @@
 | ----------------- | ---------- | ----------------- |
 | name              | string     | null: false       |
 | description       | text       | null: false       |
-| category_id       | string     | null: false       |
+| category_id       | integer    | null: false       |
 | condition_id      | integer    | null: false       |
 | ship_cost_id      | integer    | null: false       |
 | ship_from_area_id | integer    | null: false       |
