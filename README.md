@@ -17,41 +17,51 @@
 
 - has_many :items
 - has_many :orders
+- has_one :address
 
 ## items テーブル
 
-| Column         | Type       | Options     |
-| -------------- | ---------- | ----------- |
-| product        | string     | null: false |
-| description    | text       | null: false |
-| condition      | string     | null: false |
-| ship_cost      | string     | null: false |
-| ship_from_area | string     | null: false |
-| ship_days      | integer    | null: false |
-| price          | integer    | null: false |
-| user_id        | references | null: false |
+| Column            | Type       | Options     |
+| ----------------- | ---------- | ----------- |
+| product_name      | string     | null: false |
+| description       | text       | null: false |
+| condition_id      | string     | null: false |
+| ship_cost_id      | string     | null: false |
+| ship_from_area-id | string     | null: false |
+| ship_days_id      | integer    | null: false |
+| price             | integer    | null: false |
+| user              | references | null: false |
 
 ### Association
 
-- belongs_to :users
+- belongs_to :user
 - has_one :order
 
-## orders テーブル
+## order テーブル
 
-| Column                 | Type       | Options     |
-| ---------------------- | ---------- | ----------- |
-| card_number            | integer    | null: false |
-| exp_month              | integer    | null: false |
-| exp_year               | integer    | null: false |
-| card_verification_cord | integer    | null: false |
-| postal_cord            | integer    | null: false |
-| prefecture             | string     | null: false |
-| city                   | string     | null: false |
-| block_number           | integer    | null: false |
-| building_name          | string     |             |
-| phone_number           | integer    | null: false |
-| users_id               | references | null: false |
-| items_id               | references | null: false |
+| Column        | Type       | Options     |
+| ------------- | ---------- | ----------- |
+| purchase_date | timestamp  | null: false |
+| users         | references | null: false |
+| items         | references | null: false |
+
+### Association
+
+- belongs_to :user
+- belongs_to :item
+- has_one :address
+
+## addresses テーブル
+
+| Column        | Type       | Options     |
+| ------------- | ---------- | ----------- |
+| prefecture    | string     | null: false |
+| city          | string     | null: false |
+| block_number  | integer    | null: false |
+| building_name | string     |             |
+| phone_number  | integer    | null: false |
+| users         | references | null: false |
+| items         | references | null: false |
 
 ### Association
 
