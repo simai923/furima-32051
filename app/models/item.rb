@@ -5,4 +5,5 @@ class Item < ApplicationRecord
   validates :name, :description, :price, presence: true
   validates :category_id, :condition_id, :ship_cost_id, :ship_from_area_id, :ship_day_id, numericality: { other_than: 1 }
   belongs_to :user
+  has_one_attached :image
 end
