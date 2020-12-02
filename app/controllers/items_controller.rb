@@ -16,7 +16,6 @@ class ItemsController < ApplicationController
     else
       render :new
     end
-
   end
 
   def show
@@ -36,6 +35,11 @@ class ItemsController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def destroy
+    item = Item.find(params[:id])
+    redirect_to root_path if item.destroy
   end
 
   private
