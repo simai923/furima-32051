@@ -2,7 +2,10 @@ require 'rails_helper'
 RSpec.describe OrderAddress, type: :model do
   describe '商品購入情報の保存' do
     before do
-      @order_address = FactoryBot.build(:order_address)
+      item = FactoryBot.create(:item)
+      sleep 1
+      user = FactoryBot.create(:user, email: "test2@example")
+      @order_address = FactoryBot.build(:order_address, item_id: item.id ,user_id: user.id )
     end
 
     context '商品購入情報の保存がうまくいくとき' do
@@ -56,13 +59,8 @@ RSpec.describe OrderAddress, type: :model do
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include('Phone number is invalid')
       end
-      it 'phone_numberは英数字混合でないと保存できないこと' do
+      it 'phone_numberは英数字混合では保存できないこと' do
         @order_address.phone_number = '0201111aaaa'
-        @order_address.valid?
-        expect(@order_address.errors.full_messages).to include('Phone number is invalid')
-      end
-      it 'phone_numberは数字のみでないと保存できないこと' do
-        @order_address.phone_number = '020-1111-aaaa'
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include('Phone number is invalid')
       end
