@@ -3,6 +3,11 @@ class OrdersController < ApplicationController
   before_action :set_item, only: [:index, :new, :create]
 
   def index
+    if @item.user == current_user || @item.order.present?
+      redirect_to root_path
+    else
+      render :index
+    end
     @order_address = OrderAddress.new
   end
 
@@ -31,7 +36,7 @@ class OrdersController < ApplicationController
   end
 
   def pay_item
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     Payjp::Charge.create(
       amount: @item.price,
       card: order_params[:token],
